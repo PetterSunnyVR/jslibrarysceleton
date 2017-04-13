@@ -1,4 +1,5 @@
-(function(windowObj, jquerryObj){
+//; for if there was a before library that did not finish properly
+;(function(windowObj, $){
     
     //"new" an object
     var Greeter = function(firstName, lastName, language){
@@ -26,7 +27,7 @@
     var loggMessages = {
         en: 'Logged in',
         es: 'Logged in spanish',
-        zh_hk: 'Logged i chinese'
+        zh_hk: 'Logged in chinese'
     }
     
     //prototype holds methods to save memoby space
@@ -68,7 +69,7 @@
                 console.log(msg);
             }
             
-            return this;
+            return msg;
             
         },
         
@@ -94,18 +95,15 @@
         HTMLGreet: function(selector, formal){
             if(!$){
                 throw "jQuery not loaded";
-            }else if(!selector){
-                throw "missing selector";        
-            }else{
-                var msg;
-                if(formal){
-                    msg = this.formalGreeting();
-                }else{
-                    msg = this.greet();
-                }
-                
-                jquerryObj(selector).html(msg);
             }
+            if(!selector){
+                throw "missing selector";        
+            }
+            
+            var msg = this.greet(formal);
+            console.log("msg "+msg);
+            $(selector).html(msg);
+            
             
             return this;
         }
